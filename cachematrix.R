@@ -6,15 +6,15 @@ makeCacheMatrix <- function(x = matrix()) {
     
     if (!is.null(IA)) {
         message("getting cached inverseMatrix")
-        return(IA)    #get inverse from the cache
+        return(IA)    #if inverse available, get inverse from the cache
     } else
         
     {
         inverseMatrix <- cacheSolve(x)   #if inverse is not available, cacheSolve will return inverse
     }
     
-    setInverse <-function(cacheMatrix) cacheSolve(cacheMatrix)
-    getInverse <-function(cacheMatrix) cacheMatrix
+    setInverse <-function(cacheMatrix) cacheSolve(cacheMatrix) # sets inverse
+    getInverse <-function(cacheMatrix) cacheMatrix       #gets inverse
     list(set = set, get = get,
          setInverse = setInverse,
          getInverse = getInverse)
@@ -22,6 +22,7 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 cacheSolve <- function(x, ...) {
+## Return a matrix that is the inverse of 'x'
     inverseMatrix <- solve(x)  #returns inverse of matrix
     return(inverseMatrix)      #returns the value
 }
